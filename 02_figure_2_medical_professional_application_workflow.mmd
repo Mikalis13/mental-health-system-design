@@ -1,0 +1,23 @@
+flowchart TD
+    A([Start]) --> B[Professional opens dashboard]
+    B --> C[Login with MFA]
+    C --> D{Role authorised?}
+    D -- No --> E[Access denied and audit event]
+    D -- Yes --> F[Search patient]
+    F --> G[Open patient dashboard]
+    G --> H[View record summary]
+    G --> I[Review engagement graphs]
+    G --> J[Review alerts and form scores]
+    H --> K[Add healthcare note]
+    K --> L[Autocomplete drug/condition terms]
+    L --> M[Save note as locked record]
+    G --> N[Create or update exercise plan]
+    N --> O[Send exercise update message]
+    G --> P[Schedule appointment]
+    P --> Q{Single/repeat/emergency?}
+    Q --> R[Validate availability and duration]
+    R --> S[Confirm appointment]
+    M --> T[Server writes audit log]
+    O --> T
+    S --> T
+    T --> U[Dashboard updated]

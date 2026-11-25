@@ -1,0 +1,22 @@
+flowchart TD
+    A([Request received]) --> B[Check TLS and session token]
+    B --> C{Authenticated?}
+    C -- No --> D[Return 401 and log failed access]
+    C -- Yes --> E[Authorise role and patient relationship]
+    E --> F{Authorised?}
+    F -- No --> G[Return 403 and write audit log]
+    F -- Yes --> H[Validate and sanitise input]
+    H --> I{Valid input?}
+    I -- No --> J[Return validation error]
+    I -- Yes --> K{Request type}
+    K -- Read --> L[Retrieve database/file data]
+    K -- Write --> M[Store data in database/file store]
+    K -- Update --> N[Create new version or correction request]
+    L --> O[Write audit event if sensitive access]
+    M --> O
+    N --> O
+    O --> P[Return response]
+    D --> Q([End])
+    G --> Q
+    J --> Q
+    P --> Q

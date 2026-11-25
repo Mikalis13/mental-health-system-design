@@ -1,0 +1,23 @@
+flowchart TD
+    Client[External Entity: Patient/professional app] --> API[Process: Backend API gateway]
+    API --> Auth[Process: Authentication and RBAC]
+    Auth --> API
+    API --> Val[Process: Validation and sanitisation]
+    Val --> Rec[Process: Records service]
+    Val --> Appt[Process: Appointment service]
+    Val --> Ex[Process: Exercise/form service]
+    Val --> Msg[Process: Messaging service]
+    Rec --> DB[(Data Store: Relational database)]
+    Appt --> DB
+    Ex --> DB
+    Msg --> DB
+    Rec --> Files[(Data Store: Secure file storage)]
+    Msg --> Files
+    Rec --> Audit[(Data Store: Immutable audit log)]
+    Appt --> Audit
+    Ex --> Audit
+    Msg --> Audit
+    Appt --> Notify[Process: Notification service]
+    Ex --> Notify
+    Msg --> Notify
+    API --> Client

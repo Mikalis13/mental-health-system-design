@@ -1,0 +1,15 @@
+flowchart LR
+    Patient[External Entity: Patient app] --> API[Process: Backend API server]
+    Professional[External Entity: Professional dashboard] --> API
+    API --> Auth[Process: Authentication service]
+    API --> DB[(Data Store: Secure database)]
+    API --> Files[(Data Store: File storage for PDFs/images/audio)]
+    API --> Audit[(Data Store: Audit logs)]
+    API --> Notify[Process: Notification service]
+    Notify --> Patient
+    Notify --> Professional
+    DB --> API
+    Files --> API
+    Auth --> API
+    API --> Patient
+    API --> Professional

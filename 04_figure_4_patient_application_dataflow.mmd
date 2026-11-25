@@ -1,0 +1,17 @@
+flowchart LR
+    Patient[External Entity: Patient] --> P1[Process: Login and session management]
+    P1 --> Auth[Process: Authentication service]
+    Auth --> P1
+    Patient --> P2[Process: View records and appointments]
+    P2 --> API[Process: Backend API]
+    API --> D1[(Data Store: Patient records database)]
+    API --> D2[(Data Store: Appointment database)]
+    D1 --> API
+    D2 --> API
+    API --> P2
+    Patient --> P3[Process: Submit form/exercise/message]
+    P3 --> API
+    API --> D3[(Data Store: Engagement and forms)]
+    API --> D4[(Data Store: Message store)]
+    API --> D5[(Data Store: Audit log)]
+    API --> Notify[Process: Notification service]

@@ -1,0 +1,20 @@
+flowchart LR
+    Staff[External Entity: Medical professional] --> P1[Process: Staff login]
+    P1 --> Auth[Process: Authentication service]
+    Auth --> P1
+    Staff --> P2[Process: Search and open patient dashboard]
+    P2 --> API[Process: Backend API]
+    API --> D1[(Data Store: Patient database)]
+    API --> D2[(Data Store: Healthcare record database)]
+    API --> D3[(Data Store: Engagement/form database)]
+    D1 --> API
+    D2 --> API
+    D3 --> API
+    API --> P2
+    Staff --> P3[Process: Add note/update exercise/book appointment]
+    P3 --> API
+    API --> D4[(Data Store: Appointments)]
+    API --> D5[(Data Store: Exercise plans)]
+    API --> D6[(Data Store: File storage)]
+    API --> D7[(Data Store: Audit log)]
+    API --> Notify[Process: Notification service]

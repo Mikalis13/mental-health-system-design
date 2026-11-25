@@ -1,0 +1,23 @@
+erDiagram
+    PATIENT ||--o{ APPOINTMENT : books
+    MEDICALPROFESSIONAL ||--o{ APPOINTMENT : manages
+    PATIENT ||--o{ HEALTHCARERECORD : has
+    MEDICALPROFESSIONAL ||--o{ HEALTHCARERECORD : authors
+    HEALTHCARERECORD ||--o{ RECORDATTACHMENT : includes
+    PATIENT ||--o{ EXERCISEPLAN : receives
+    MEDICALPROFESSIONAL ||--o{ EXERCISEPLAN : creates
+    EXERCISEPLAN ||--o{ EXERCISEENGAGEMENT : records
+    PATIENT ||--o{ MESSAGE : relates_to
+    PATIENT ||--o{ DIGITALFORMRESPONSE : submits
+    PATIENT ||--o{ AUDITLOG : target_patient
+    MEDICALPROFESSIONAL ||--o{ AUDITLOG : actor
+    PATIENT { string patient_id PK string nhs_number string first_name string last_name date date_of_birth string email string phone text accessibility_needs }
+    MEDICALPROFESSIONAL { string professional_id PK string name string role string staff_number string email string department }
+    APPOINTMENT { string appointment_id PK string patient_id FK string professional_id FK string appointment_type datetime start_datetime datetime end_datetime string status boolean emergency_flag }
+    HEALTHCARERECORD { string record_id PK string patient_id FK string author_id FK text note_text datetime created_at string record_status boolean correction_requested }
+    RECORDATTACHMENT { string attachment_id PK string record_id FK string file_type decimal file_size_mb string storage_uri text caption_note }
+    EXERCISEPLAN { string plan_id PK string patient_id FK string professional_id FK string exercise_name text instructions date start_date date end_date string reminder_frequency }
+    EXERCISEENGAGEMENT { string engagement_id PK string plan_id FK string patient_id FK datetime completed_at boolean completion_status int mood_score text notes }
+    MESSAGE { string message_id PK string sender_id string recipient_id string patient_id FK text body_text string attachment_uri datetime sent_at datetime read_at }
+    DIGITALFORMRESPONSE { string response_id PK string patient_id FK string form_type datetime submitted_at json response_json int calculated_score string risk_level }
+    AUDITLOG { string audit_id PK string actor_id string action string target_entity string target_id datetime timestamp string ip_address text reason }

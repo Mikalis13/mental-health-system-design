@@ -1,0 +1,28 @@
+flowchart TD
+    A([Start]) --> B[Patient opens app]
+    B --> C[Login with MFA]
+    C --> D{Authenticated?}
+    D -- No --> E[Show error and recovery option]
+    E --> C
+    D -- Yes --> F[Home dashboard]
+    F --> G[View healthcare record]
+    G --> H{Record incorrect?}
+    H -- Yes --> I[Submit correction request]
+    H -- No --> F
+    F --> J[Book appointment]
+    J --> K[Choose team or professional]
+    K --> L[Select slot within 2 months]
+    L --> M[Confirm appointment]
+    F --> N[Complete exercise]
+    N --> O[Record completion and mood score]
+    F --> P[Submit digital form]
+    P --> Q[Validate required answers]
+    F --> R[Send secure message]
+    R --> S[Attach text/audio/image if needed]
+    I --> T[Server saves request and writes audit log]
+    M --> T
+    O --> T
+    Q --> T
+    S --> T
+    T --> U[Return confirmation]
+    U --> F
